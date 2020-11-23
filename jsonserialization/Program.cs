@@ -1,5 +1,4 @@
 ﻿using System;
-using Microsoft.VisualBasic;
 using Newtonsoft.Json;
 
 namespace jsonserialization
@@ -8,16 +7,18 @@ namespace jsonserialization
     {
         static void Main()
         {
-            Console.WriteLine("Hello World!");
-
             Author author = new Author { Name = "Anders B", YearOfBirth = 1966 };
             Book book = new Book { Title = "Make C# Great Again", Auth = author };
+
+            // Single object
 
             string jsonStr = JsonConvert.SerializeObject(book);
             Console.WriteLine(jsonStr);
 
             Book bookCopy = JsonConvert.DeserializeObject<Book>(jsonStr);
             Console.WriteLine(bookCopy);
+
+            // Array of objects
 
             Book[] books = {
                 book,
@@ -28,7 +29,8 @@ namespace jsonserialization
             Console.WriteLine(jsonStr2);
 
             Book[] booksCopy = JsonConvert.DeserializeObject<Book[]>(jsonStr2);
-            Console.WriteLine("Array: " + string.Join<Book>(", ", booksCopy));
+            string booksStr = string.Join<Book>(", ", booksCopy);
+            Console.WriteLine("Array: " + booksStr);
         }
     }
 }
